@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  # MongoDB Database (for local development only, use MongoDB Atlas in production)
+  # mongodb:
+  #   image: mongo:7
+  #   container_name: roome-mongodb
+  #   restart: unless-stopped
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: admin
+  #     MONGO_INITDB_ROOT_PASSWORD: password
+  #   ports:
+  #     - '27017:27017'
+  #   volumes:
+  #     - mongodb_data:/data/db
+  #   networks:
+  #     - roome-network
+
+  # Backend Server
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: roome-server
+    restart: unless-stopped
+    env_file:
+      - ./server/.env
+    ports:
+      - '5000:5000'
+    # depends_on:
+    #   - mongodb
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    networks:
+      - roome-network
+
+  # Frontend Client
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: roome-client
+    restart: unless-stopped
+    env_file:
+      - ./client/.env.local
+    ports:
+      - '3000:3000'
+    depends_on:
+      - server
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+      - /app/.next
+    networks:
+      - roome-network
+
+volumes:
+  # mongodb_data:
+  #   driver: local
+
+networks:
+  roome-network:
+    driver: bridge
