@@ -6,7 +6,7 @@ import { EnvConfig } from './config/env.config';
 import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { RoomModule } from './modules/room/room.module';
-
+import { AccountModule } from './modules/account/account.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -19,6 +19,7 @@ import { RoomModule } from './modules/room/room.module';
     UserModule,
     AuthModule,
     RoomModule,
+    AccountModule,
   ],
 })
 export class AppModule {}
