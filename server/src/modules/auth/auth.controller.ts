@@ -22,9 +22,23 @@ export class AuthController {
 
   @Post('register')
   async register(
-    @Body() createUserDto: { email: string; password: string; name: string },
+    @Body()
+    createUserDto: {
+      email: string;
+      password: string;
+      name: string;
+      role?: any;
+    },
   ) {
-    return this.authService.register(createUserDto);
+    const payload = {
+      email: createUserDto.email,
+      password: createUserDto.password,
+      full_name: createUserDto.name,
+      // default to a basic role when none provided; cast to any to satisfy the service's UserRole type
+      role: (createUserDto as any).role ?? ('user' as any),
+    };
+
+    return this.authService.register(payload);
   }
 
   @UseGuards(JwtAuthGuard)
