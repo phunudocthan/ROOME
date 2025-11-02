@@ -6,11 +6,7 @@ import { EnvConfig } from './config/env.config';
 import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { RoomModule } from './modules/room/room.module';
-<<<<<<< HEAD
 import { AccountModule } from './modules/account/account.module';
-=======
-
->>>>>>> a405589 (project init)
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -23,10 +19,7 @@ import { AccountModule } from './modules/account/account.module';
     UserModule,
     AuthModule,
     RoomModule,
-<<<<<<< HEAD
     AccountModule,
-=======
->>>>>>> a405589 (project init)
   ],
 })
 export class AppModule {}

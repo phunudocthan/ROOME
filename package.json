@@ -16,6 +16,7 @@
     "test:server": "yarn --cwd server test"
   },
   "devDependencies": {
+    "@types/nodemailer": "^7.0.3",
     "concurrently": "^8.2.2"
   },
   "workspaces": [
@@ -25,5 +26,11 @@
   "engines": {
     "node": ">=22.0.0",
     "yarn": ">=1.22.0"
+  },
+  "dependencies": {
+    "@nestjs-modules/mailer": "^2.0.2",
+    "@nestjs/swagger": "^11.2.1",
+    "mongodb": "^6.20.0",
+    "nodemailer": "^7.0.10"
   }
 }

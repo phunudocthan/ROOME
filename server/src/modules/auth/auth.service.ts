@@ -3,8 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../user/user.service';
 import * as bcrypt from 'bcrypt';
 // Import your UserRole enum from your schema/model file
-import { UserRole } from '..modules/user/user.schema';
-
+import { UserRole } from '../user/user.schema';
 @Injectable()
 export class AuthService {
   constructor(
@@ -21,7 +20,8 @@ export class AuthService {
     const user = await this.userService.findByEmail(email);
     if (user && (await bcrypt.compare(password, user.password))) {
       // Password matches. Return the user object without the password.
-      const { password, ...result } = user.toObject();
+      const result = user.toObject();
+      delete result.password;
       return result;
     }
     return null; // Invalid credentials
